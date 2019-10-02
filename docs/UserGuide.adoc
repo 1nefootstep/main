@@ -62,6 +62,9 @@ Format: `help`
 Creates an activity to the activity list +
 Format: `create activity n/NAME d/DURATION [l/LOCATION] [dt/DATE_TIME]`
 
+* DURATION is in hours. Shortest acceptable duration is 0.5 hours.
+* DATE_TIME is in dd/mm/yyyy HHHH format.
+
 Examples:
 
 * `create activity n/Oscar d/21`
@@ -72,111 +75,201 @@ Examples:
 Edits an activity +
 Format: `edit activity INDEX [n/NAME] [d/DURATION] [l/LOCATION]`
 
+* Edits the activity with the specified INDEX. The index refers to the index number shown in the displayed activity list. The index must be a positive integer 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
 Examples:
 
 * `edit activity 1 n/Dinner d/0.5 l/Hotel`
+
 Edits the name, duration and location of the 1st activity to be Dinner, 0.5 and Hotel respectively.
 
-=== Adding a person: `add`
+=== Deleting an activity: `delete activity`
 
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Delete one or more activities from the activity list +
+Format: `delete activity INDEX...`
 
-[TIP]
-A person can have any number of tags (including 0)
+* Deletes the activity at the specified INDEX.
+* The index refers to the index number shown in the displayed activity list.
+* The index must be a positive integer 1, 2, 3, …
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `delete activity 2`
 
-=== Listing all persons : `list`
+Deletes the 2nd activity in the activity list.
 
-Shows a list of all persons in the address book. +
-Format: `list`
+=== Listing all activities: `list activity`
 
-=== Editing a person : `edit`
+Displays a list view of all the activities +
+Format: `list activity`
 
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+=== Creating a contact: `create contact`
 
-****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
+Creates a contact to the contact list +
+Format: `create contact n/NAME p/PHONE_NUMBER t/IS_EMERGENCY`
+
+* IS_EMERGENCY specifies whether the contact is for emergency purposes.
+
+Examples:
+
+* `create contact n/Bob p/83746658 t/false`
+
+=== Deleting a contact: `delete contact`
+
+Deletes a contact from the contact list +
+Format: `delete contact INDEX...`
+
+* Deletes the contact at the specified INDEX.
+* The index refers to the index number shown in the displayed contact list.
+* The index must be a positive integer 1, 2, 3, …
+
+Examples:
+
+* `delete activity 3`
+
+Deletes the 3rd contact in the contact list.
+
+=== Editing a contact: `edit contact`
+
+Edits an existing contact in the contact list +
+Format: `edit contact INDEX [p/PHONE_NUMBER] [t/IS_EMERGENCY]`
+
+* Edits the contact with the specified INDEX. The index refers to the index number shown in the displayed contact list. The index must be a positive integer 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
-****
+
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit contact 1 p/93746658 t/true`
 
-=== Locating persons by name: `find`
+Edits the phone number and emergency field of the 1st contact to be 93746658 and true respectively.
 
-Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
+=== Listing all contacts: `list contact`
 
-****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-****
+Displays a list view of all the contact list +
+Format: `list contact`
+
+=== Adds days to the schedule: `add day`
+
+Adds DAY_NUMBER amount of days to the schedule +
+Format: `create day DAY_NUMBER`
 
 Examples:
 
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
+* `add day 7`
 
-// tag::delete[]
-=== Deleting a person : `delete`
+Adds 7 days to the back of the schedule.
 
-Deletes the specified person from the address book. +
-Format: `delete INDEX`
+=== Deleting days: `delete day`
 
-****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
+Deletes DAY_NUMBER th day of the schedule. +
+Format: `delete day DAY_NUMBER`
 
 Examples:
 
-* `list` +
-`delete 2` +
-Deletes the 2nd person in the address book.
-* `find Betsy` +
-`delete 1` +
-Deletes the 1st person in the results of the `find` command.
+* `delete day 2`
 
-// end::delete[]
-=== Clearing all entries : `clear`
+Deletes the day 2 from the schedule.
 
-Clears all entries from the address book. +
-Format: `clear`
+=== Scheduling activities to a day: `schedule`
+
+Schedules activities to a day +
+Format: `schedule DAY_NUMBER ACTIVITY_INDEX…`
+
+Examples:
+
+* `schedule day 2 5 10 4 11`
+
+Schedules activities 5, 10, 4, 11 under day 2. 
+
+=== Unscheduling activities from a day: `unschedule activity`
+
+Unschedule activities from a day +
+Format: `unschedule activity ACTIVITY_INDEX... DAY_NUMBER`
+
+Examples:
+
+* `unschedule activity 5 day 1`
+
+This remove activity 5 from day 1.
+
+=== Unscheduling activities from a day: `unschedule time`
+
+Unschedule activities from a day +
+Format: `unschedule time TIME_BY_24HR_CLOCK day DAY_NUMBER`
+
+Examples:
+
+* `unschedule time 2300 day 1`
+
+This removes the activity at 2300 from day 1 of the schedule.
+
+=== List the activities in a day: `list day`
+
+List the activities in a day +
+Format: `list day DAY_NUMBER`
+
+Examples:
+
+* `list day 1`
+
+This will list out all the activities scheduled for day 1.
+
+=== Undo: `undo`
+
+Undo by one action +
+Format: `undo`
+
+=== Redo: `redo`
+
+Redo by one action +
+Format: `redo`
+
+=== Look up history of inputs: `history`
+
+Lists the inputs that have been entered +
+Format: `history`
+
+=== Saving the data: `save`
+
+Saves the state of the program. If provided with a schedule name, it will create a new file with the schedule name. Else, it will simply save it to the current save file +
+Format: `save [SCHEDULE_NAME]`
+
+Examples:
+
+* `save japan_trip`
+
+=== Loading the data: `load`
+
+The user can load the desired schedule with the schedule name. Else, the user can create a new schedule +
+Format: `load SCHEDULE_NAME`
+
+Examples:
+
+* `load beijing`
+
+=== Export schedule: `export`
+
+Exports the schedule into a pdf +
+Format: `export`
+
+=== Auto-correct
+
+When there is an invalid command, the input command is checked against the known command list for similarity and the user will be prompted with the closest command match
+
+Examples:
+
+* `hitsory`
+
+User will be prompted with the “history” command as a suggestion.
 
 === Exiting the program : `exit`
 
 Exits the program. +
 Format: `exit`
-
-=== Saving the data
-
-Address book data are saved in the hard disk automatically after any command that changes the data. +
-There is no need to save manually.
-
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
-
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
 
 == FAQ
 
