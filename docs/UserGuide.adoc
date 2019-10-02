@@ -57,6 +57,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 Displays a help page +
 Format: `help`
 
+// tag::createactivity[]
 === Creating an activity: `create activity`
 
 Creates an activity to the activity list +
@@ -70,6 +71,7 @@ Examples:
 * `create activity n/Oscar d/21`
 * `create activity n/Ernest d/1 l/Tokyo dt/18/9/2019 0900`
 
+// end::createactivity[]
 === Editing an activity: `edit activity`
 
 Edits an activity +
@@ -85,6 +87,7 @@ Examples:
 
 Edits the name, duration and location of the 1st activity to be Dinner, 0.5 and Hotel respectively.
 
+// tag::deleteactivity[]
 === Deleting an activity: `delete activity`
 
 Delete one or more activities from the activity list +
@@ -100,6 +103,7 @@ Examples:
 
 Deletes the 2nd activity in the activity list.
 
+// end::deleteactivity[]
 === Listing all activities: `list activity`
 
 Displays a list view of all the activities +
