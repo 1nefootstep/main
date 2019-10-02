@@ -54,7 +54,28 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 === Viewing help : `help`
 
+Displays a help page +
 Format: `help`
+
+=== Creating an activity: `create activity`
+
+Creates an activity to the activity list +
+Format: `create activity n/NAME d/DURATION [l/LOCATION] [dt/DATE_TIME]`
+
+Examples:
+
+* `create activity n/Oscar d/21`
+* `create activity n/Ernest d/1 l/Tokyo dt/18/9/2019 0900`
+
+=== Editing an activity: `edit activity`
+
+Edits an activity +
+Format: `edit activity INDEX [n/NAME] [d/DURATION] [l/LOCATION]`
+
+Examples:
+
+* `edit activity 1 n/Dinner d/0.5 l/Hotel`
+Edits the name, duration and location of the 1st activity to be Dinner, 0.5 and Hotel respectively.
 
 === Adding a person: `add`
 
