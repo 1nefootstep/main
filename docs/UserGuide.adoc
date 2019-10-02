@@ -1,4 +1,4 @@
-	= Trip^2^Planner - User Guide
+= Trip^2^Planner - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
