@@ -187,7 +187,7 @@ Examples:
 
 * `schedule day 2 5 10 4 11`
 
-Schedules activities 5, 10, 4, 11 under day 2. 
+Schedules activities 5, 10, 4, 11 under day 2.
 
 === Unscheduling activities from a day: `unschedule activity`
 
