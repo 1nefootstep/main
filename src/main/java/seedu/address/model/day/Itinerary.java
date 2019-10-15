@@ -50,7 +50,7 @@ public class Itinerary {
     public void addDays(int n) {
         numberOfDays += n;
         for (int i = 0; i < n; i++) {
-            days.add(new Day());
+            days.add(new Day(new ArrayList<>()));
         }
     }
 
