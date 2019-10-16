@@ -15,6 +15,7 @@ import seedu.address.model.contact.Phone;
 import seedu.address.model.day.Day;
 import seedu.address.model.day.time.DurationInHalfHour;
 import seedu.address.model.day.time.TimeInHalfHour;
+import seedu.address.model.day.time.exceptions.NotInIntervalsOf30MinException;
 import seedu.address.model.field.Address;
 import seedu.address.model.field.Name;
 import seedu.address.model.tag.Tag;
@@ -154,8 +155,9 @@ public class ParserUtil {
         if (!TimeInHalfHour.isValidTime(trimmedTime)) {
             throw new ParseException(TimeInHalfHour.MESSAGE_CONSTRAINTS);
         }
-        int hour = Integer.parseInt(time.substring(0, 2));
-        int min = Integer.parseInt(time.substring(2));
+        int hour = Integer.parseInt(trimmedTime.substring(0, 2));
+        int min = Integer.parseInt(trimmedTime.substring(2));
+
         return new TimeInHalfHour(hour, min);
     }
 
