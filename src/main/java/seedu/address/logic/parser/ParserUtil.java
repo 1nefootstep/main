@@ -15,7 +15,6 @@ import seedu.address.model.contact.Phone;
 import seedu.address.model.day.Day;
 import seedu.address.model.day.time.DurationInHalfHour;
 import seedu.address.model.day.time.TimeInHalfHour;
-import seedu.address.model.day.time.exceptions.NotInIntervalsOf30MinException;
 import seedu.address.model.field.Address;
 import seedu.address.model.field.Name;
 import seedu.address.model.tag.Tag;
