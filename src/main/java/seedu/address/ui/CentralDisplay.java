@@ -176,13 +176,13 @@ public class CentralDisplay extends UiPart<Region> {
         infoList.getItems().clear();
         for (ResultInformation i : resultInformation) {
             i.getAccommodation().ifPresent(accommodation ->
-                    addAccommodationInfo(accommodation, i.getIndex(), i.getDescription())
+                    addAccommodationInfo(accommodation, i.getIndex(), i.getDescription().orElse(""))
             );
             i.getActivity().ifPresent(activity ->
-                    addActivityInfo(activity, i.getIndex(), i.getDescription())
+                    addActivityInfo(activity, i.getIndex(), i.getDescription().orElse(""))
             );
             i.getContact().ifPresent(contact ->
-                    addContactInfo(contact, i.getIndex(), i.getDescription())
+                    addContactInfo(contact, i.getIndex(), i.getDescription().orElse(""))
             );
         }
     }
