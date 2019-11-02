@@ -20,6 +20,7 @@ import seedu.planner.logic.commands.result.UiFocus;
 import seedu.planner.logic.commands.util.HelpExplanation;
 import seedu.planner.model.Model;
 import seedu.planner.model.activity.Activity;
+import seedu.planner.model.activity.Duration;
 import seedu.planner.model.activity.NameWithTime;
 import seedu.planner.model.day.ActivityWithTime;
 import seedu.planner.model.day.Day;
@@ -221,7 +222,7 @@ public class AutoScheduleCommand extends UndoableCommand {
      */
     private ActivityWithTime activityToSchedule(LocalTime currentTime, int duration, Activity activity) {
         LocalTime endTime = currentTime.plusMinutes(duration);
-        return new ActivityWithTime(activity, currentTime, endTime);
+        return new ActivityWithTime(activity, currentTime);
     }
 
     /**

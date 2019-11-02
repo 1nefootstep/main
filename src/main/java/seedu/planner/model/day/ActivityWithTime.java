@@ -5,6 +5,7 @@ import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.LocalTime;
 
 import seedu.planner.model.activity.Activity;
+import seedu.planner.model.activity.Duration;
 
 /**
  * Wraps the Activity in an object with time and duration fields.
@@ -12,13 +13,19 @@ import seedu.planner.model.activity.Activity;
 public class ActivityWithTime implements Comparable<ActivityWithTime> {
     private final Activity activity;
     private final LocalTime startTime;
-    private final LocalTime endTime;
+//    private final LocalTime endTime;
 
-    public ActivityWithTime(Activity activity, LocalTime startTime, LocalTime endTime) {
-        requireAllNonNull(activity, startTime, endTime);
+//    public ActivityWithTime(Activity activity, LocalTime startTime, LocalTime endTime) {
+//        requireAllNonNull(activity, startTime, endTime);
+//        this.activity = activity;
+//        this.startTime = startTime;
+//        this.endTime = endTime;
+//    }
+
+    public ActivityWithTime(Activity activity, LocalTime startTime) {
+        requireAllNonNull(activity, startTime);
         this.activity = activity;
         this.startTime = startTime;
-        this.endTime = endTime;
     }
 
     public Activity getActivity() {
@@ -30,15 +37,15 @@ public class ActivityWithTime implements Comparable<ActivityWithTime> {
     }
 
     public LocalTime getEndTime() {
-        return this.endTime;
+        return startTime.plusMinutes(activity.getDuration().value);
     }
 
     /**
      * Checks whether activities are overlapping.
      */
     public boolean isOverlapping(ActivityWithTime other) {
-        return !((this.startTime.compareTo(other.startTime) < 0 && this.endTime.compareTo(other.startTime) <= 0)
-            || (other.startTime.compareTo(this.startTime) < 0 && other.endTime.compareTo(this.startTime) <= 0));
+        return !((this.startTime.compareTo(other.startTime) < 0 && this.getEndTime().compareTo(other.startTime) <= 0)
+            || (other.startTime.compareTo(this.startTime) < 0 && other.getEndTime().compareTo(this.startTime) <= 0));
     }
 
     @Override
@@ -59,7 +66,7 @@ public class ActivityWithTime implements Comparable<ActivityWithTime> {
 
         return this.activity.equals(otherActivity.activity)
                 && this.startTime.equals(otherActivity.startTime)
-                && this.endTime.equals(otherActivity.endTime);
+                && this.getEndTime().equals(otherActivity.getEndTime());
     }
 
     @Override
