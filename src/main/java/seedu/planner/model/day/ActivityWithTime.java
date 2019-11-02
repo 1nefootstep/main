@@ -5,6 +5,7 @@ import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.LocalTime;
 
 import seedu.planner.model.activity.Activity;
+import seedu.planner.model.activity.Duration;
 
 /**
  * Wraps the Activity in an object with time and duration fields.
