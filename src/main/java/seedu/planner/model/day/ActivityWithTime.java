@@ -5,7 +5,6 @@ import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.LocalTime;
 
 import seedu.planner.model.activity.Activity;
-import seedu.planner.model.activity.Duration;
 
 /**
  * Wraps the Activity in an object with time and duration fields.
@@ -13,14 +12,6 @@ import seedu.planner.model.activity.Duration;
 public class ActivityWithTime implements Comparable<ActivityWithTime> {
     private final Activity activity;
     private final LocalTime startTime;
-//    private final LocalTime endTime;
-
-//    public ActivityWithTime(Activity activity, LocalTime startTime, LocalTime endTime) {
-//        requireAllNonNull(activity, startTime, endTime);
-//        this.activity = activity;
-//        this.startTime = startTime;
-//        this.endTime = endTime;
-//    }
 
     public ActivityWithTime(Activity activity, LocalTime startTime) {
         requireAllNonNull(activity, startTime);
