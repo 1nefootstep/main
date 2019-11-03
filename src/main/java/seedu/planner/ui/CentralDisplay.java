@@ -158,7 +158,11 @@ public class CentralDisplay extends UiPart<Region> {
         agenda.setAllowResize(false);
         // disables right click editing
         agenda.setEditAppointmentCallback((appointment) -> null);
-        agendaTab.setContent(agenda);
+        if (dayList.size() == 0) {
+            agendaTab.setContent(null);
+        } else {
+            agendaTab.setContent(agenda);
+        }
     }
 
     /**
@@ -201,6 +205,11 @@ public class CentralDisplay extends UiPart<Region> {
                 return lLocalDates;
             }
         });
+        if (dayList.size() == 0) {
+            agendaTab.setContent(null);
+        } else {
+            agendaTab.setContent(agenda);
+        }
     }
 
     /**

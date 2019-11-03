@@ -55,6 +55,7 @@ public class InitCommand extends Command {
         if (this.name.name.length() > 30) {
             throw new CommandException(MESSAGE_NAME_IS_TOO_LONG);
         }
+
         model.setItineraryName(this.name);
         LocalDate oldStartDate = model.getStartDate();
         long differenceInDaysBetweenOldAndNew = ChronoUnit.DAYS.between(oldStartDate, startDate);
