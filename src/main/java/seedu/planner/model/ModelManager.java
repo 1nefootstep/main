@@ -645,7 +645,7 @@ public class ModelManager implements Model {
 
     @Override
     public LocalDateTime getLastDateTime() {
-        return this.itinerary.getStartDate().plusDays(getNumberOfDays() - 1).atTime(23,59);
+        return this.itinerary.getStartDate().plusDays(getNumberOfDays() - 1).atTime(23, 59);
     }
 
     @Override

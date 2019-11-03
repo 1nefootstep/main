@@ -52,6 +52,9 @@ public class CommandUtil {
         return indexOfContact.get();
     }
 
+    /**
+     * Calculates and returns the endDateTime of an activity.
+     */
     public static LocalDateTime calculateEndDateTime(LocalDate startDate,
                                                      Index dayIndex, LocalTime startTime, Duration duration) {
         return LocalDateTime.of(startDate.plusDays(dayIndex.getZeroBased()), startTime)

@@ -8,6 +8,7 @@ import static seedu.planner.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -305,6 +306,10 @@ public class AddContactCommandTest {
         }
 
         public LocalDate getStartDate() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public LocalDateTime getLastDateTime() {
             throw new AssertionError("This method should not be called.");
         }
 
