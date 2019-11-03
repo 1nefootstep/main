@@ -299,7 +299,7 @@ public class CentralDisplay extends UiPart<Region> {
             agenda.appointments().add(
                 new Agenda.AppointmentImplLocal()
                     .withStartLocalDateTime(activityWithTime.getStartDateTime())
-                    .withEndLocalDateTime(activityWithTime.getEndTime())
+                    .withEndLocalDateTime(activityWithTime.getEndDateTime())
                     .withSummary(textToDisplay)
             );
         }

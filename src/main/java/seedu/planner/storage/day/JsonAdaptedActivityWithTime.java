@@ -39,7 +39,7 @@ public class JsonAdaptedActivityWithTime {
     public JsonAdaptedActivityWithTime(ActivityWithTime source) {
         activity = new JsonAdaptedActivity(source.getActivity());
         startDateTime = source.getStartDateTime().toString();
-        endTime = source.getEndTime().toString();
+        endTime = source.getEndDateTime().toString();
     }
 
     /**

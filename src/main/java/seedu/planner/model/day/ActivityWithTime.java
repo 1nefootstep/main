@@ -31,7 +31,7 @@ public class ActivityWithTime implements Comparable<ActivityWithTime> {
         return this.startDateTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public LocalDateTime getEndDateTime() {
         return startDateTime.plusMinutes(activity.getDuration().value);
     }
 
@@ -40,9 +40,9 @@ public class ActivityWithTime implements Comparable<ActivityWithTime> {
      */
     public boolean isOverlapping(ActivityWithTime other) {
         return !((this.startDateTime.compareTo(other.startDateTime) < 0
-                && this.getEndTime().compareTo(other.startDateTime) <= 0)
+                && this.getEndDateTime().compareTo(other.startDateTime) <= 0)
             || (other.startDateTime.compareTo(this.startDateTime) < 0
-                && other.getEndTime().compareTo(this.startDateTime) <= 0));
+                && other.getEndDateTime().compareTo(this.startDateTime) <= 0));
     }
 
     @Override
@@ -63,7 +63,7 @@ public class ActivityWithTime implements Comparable<ActivityWithTime> {
 
         return this.activity.equals(otherActivity.activity)
                 && this.startDateTime.equals(otherActivity.startDateTime)
-                && this.getEndTime().equals(otherActivity.getEndTime());
+                && this.getEndDateTime().equals(otherActivity.getEndDateTime());
     }
 
     @Override
