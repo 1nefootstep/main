@@ -182,13 +182,13 @@ public class CentralDisplay extends UiPart<Region> {
             agendaTab.setText(newValue.toString() + " Itinerary");
         });
         agendaTab.setOnSelectionChanged((event)-> {
-            if(agendaTab.isSelected()) {
+            if (agendaTab.isSelected()) {
                 updateAgenda(agenda, dayList);
                 updateSkin(agenda);
             }
         });
         helpTab.setOnSelectionChanged((event)-> {
-            if(helpTab.isSelected()) {
+            if (helpTab.isSelected()) {
                 generateCommandHelpSummary();
             }
         });
