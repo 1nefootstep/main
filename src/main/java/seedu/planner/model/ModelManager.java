@@ -5,6 +5,7 @@ import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -640,6 +641,11 @@ public class ModelManager implements Model {
     @Override
     public LocalDate getStartDate() {
         return this.itinerary.getStartDate();
+    }
+
+    @Override
+    public LocalDateTime getLastDateTime() {
+        return this.itinerary.getStartDate().plusDays(getNumberOfDays() - 1).atTime(23,59);
     }
 
     @Override

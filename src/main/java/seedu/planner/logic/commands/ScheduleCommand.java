@@ -16,7 +16,9 @@ import seedu.planner.commons.core.index.Index;
 import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.logic.commands.result.CommandResult;
 import seedu.planner.logic.commands.result.UiFocus;
+import seedu.planner.logic.commands.util.CommandUtil;
 import seedu.planner.logic.commands.util.HelpExplanation;
+import seedu.planner.model.Itinerary;
 import seedu.planner.model.Model;
 import seedu.planner.model.activity.Activity;
 import seedu.planner.model.day.ActivityWithTime;
@@ -91,11 +93,10 @@ public class ScheduleCommand extends UndoableCommand {
 
         Day dayToEdit = lastShownDays.get(dayIndex.getZeroBased());
         Activity activityToSchedule = lastShownActivities.get(activityIndex.getZeroBased());
-        LocalDateTime lastDateTimeOfItinerary = model.getStartDate().plusDays(model.getNumberOfDays() - 1)
-                .atTime(23, 59);
-        LocalDateTime endDateTime = LocalDateTime.of(model.getStartDate().plusDays(dayIndex.getZeroBased()), startTime)
-                .plusMinutes(activityToSchedule.getDuration().value);
-        if (endDateTime.isAfter(lastDateTimeOfItinerary)) {
+        LocalDateTime lastDateTimeOfItinerary = model.getLastDateTime();
+        LocalDateTime endDateTimeOfActivity = CommandUtil.calculateEndDateTime(model.getStartDate(),
+                dayIndex, startTime, activityToSchedule.getDuration());
+        if (endDateTimeOfActivity.isAfter(lastDateTimeOfItinerary)) {
             throw new CommandException(MESSAGE_END_TIME_EXCEEDS_LAST_DAY);
         }
 
