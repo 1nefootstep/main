@@ -309,6 +309,12 @@ public interface Model {
     void setItineraryStartDate(LocalDate date);
 
     /**
+     * Shifts the entire itinerary by {@code days} amount of days.
+     * @param days the amount of days to shift by
+     */
+    void shiftDatesInItineraryByDay(long days);
+
+    /**
      * Replaces current Itinerary data with the data in {@code itinerary}.
      */
     void setItinerary(ReadOnlyItinerary itinerary);

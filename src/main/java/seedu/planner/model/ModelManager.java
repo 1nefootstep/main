@@ -648,6 +648,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void shiftDatesInItineraryByDay(long days) {
+        this.itinerary.shiftDatesInItineraryByDay(days);
+    }
+
+    @Override
     public void setItinerary(ReadOnlyItinerary itinerary) {
         this.itinerary.resetDataItinerary(itinerary);
     }
