@@ -92,7 +92,7 @@ public class ScheduleCommand extends UndoableCommand {
         Day dayToEdit = lastShownDays.get(dayIndex.getZeroBased());
         Activity activityToSchedule = lastShownActivities.get(activityIndex.getZeroBased());
         LocalDateTime lastDateTimeOfItinerary = model.getStartDate().plusDays(model.getNumberOfDays() - 1)
-                .atTime(23,59);
+                .atTime(23, 59);
         LocalDateTime endDateTime = LocalDateTime.of(model.getStartDate().plusDays(dayIndex.getZeroBased()), startTime)
                 .plusMinutes(activityToSchedule.getDuration().value);
         if (endDateTime.isAfter(lastDateTimeOfItinerary)) {
