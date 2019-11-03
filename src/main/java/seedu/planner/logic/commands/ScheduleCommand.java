@@ -90,11 +90,13 @@ public class ScheduleCommand extends UndoableCommand {
 
         Day dayToEdit = lastShownDays.get(dayIndex.getZeroBased());
         Activity activityToSchedule = lastShownActivities.get(activityIndex.getZeroBased());
-        LocalTime endTime = startTime.plusMinutes(activityToSchedule.getDuration().value);
-        if (activityToSchedule.getDuration().value >= 1440 || endTime.isBefore(startTime)) {
-            throw new CommandException(MESSAGE_END_TIME_EXCEEDS_2359);
-        }
-        ActivityWithTime activityWithTimeToAdd = new ActivityWithTime(activityToSchedule, startTime);
+        //LocalTime endTime = startTime.plusMinutes(activityToSchedule.getDuration().value);
+        //if (activityToSchedule.getDuration().value >= 1440 || endTime.isBefore(startTime)) {
+        //    throw new CommandException(MESSAGE_END_TIME_EXCEEDS_2359);
+        //}
+
+        ActivityWithTime activityWithTimeToAdd = new ActivityWithTime(activityToSchedule,
+                startTime.atDate(model.getStartDate().plusDays(dayIndex.getZeroBased())));
 
         model.scheduleActivity(dayToEdit, activityWithTimeToAdd);
 
