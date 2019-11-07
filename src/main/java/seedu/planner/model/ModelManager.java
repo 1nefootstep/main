@@ -561,7 +561,6 @@ public class ModelManager implements Model {
     @Override
     public void deleteActivity(Activity target) {
         removeActivityMapping(target);
-        //removeDayMapping(target);
         activities.removeActivity(target);
 
         List<Day> listOfDaysWithActivity = getDaysWithActivity(target);
