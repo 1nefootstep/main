@@ -43,18 +43,6 @@ public class Day {
         return this.timetable.getActivitiesWithTime();
     }
 
-    public void addActivityWithTime(ActivityWithTime toAdd) {
-        this.timetable.addActivityWithTime(toAdd);
-    }
-
-    public void removeActivityWithTime(Index toRemove) {
-        this.timetable.removeActivityWithTime(toRemove);
-    }
-
-    public void removeActivity(Activity activity) {
-        this.timetable.removeActivity(activity);
-    }
-
     public Optional<ActivityWithTime> findNextActNoOverlap(Index index) {
         return timetable.findNextNoOverlap(index);
     }

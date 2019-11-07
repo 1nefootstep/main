@@ -110,7 +110,7 @@ public class DayList implements Iterable<Day> {
         }
     }
 
-    public List<Day> getDays(Activity activity) {
+    public List<Day> getDaysWithActivity(Activity activity) {
         List<Day> listOfDays = new ArrayList<>();
         for (Day day : internalList) {
             if (day.hasActivity(activity)) {

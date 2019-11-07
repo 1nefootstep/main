@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -165,46 +166,12 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Creates a mapping between an {@code Activity} and the {@code Day} containing it.
-     */
-    private void addDayMapping(Activity act, Day day) {
-        if (activityDayMap.containsKey(act)) {
-            activityDayMap.get(act).add(day);
-        } else {
-            activityDayMap.put(act, new ArrayList<>(Arrays.asList(day)));
-        }
-    }
-
-    /**
      * Removes the mapping of an {@code Activity} in all the relevant {@code Contact} related {@code HashMap}.
      */
     private void removeActivityMapping(Activity act) {
         if (activityContactMap.containsKey(act)) {
             Contact contact = activityContactMap.remove(act);
             contactActivityMap.remove(contact);
-        }
-    }
-
-    /**
-     * Removes the mapping of an {@code Activity} in the {@code Day} related {@code HashMap} when an activity is
-     * deleted.
-     */
-    private void removeDayMapping(Activity act) {
-        if (activityDayMap.containsKey(act)) {
-            List<Day> listOfDays = activityDayMap.remove(act);
-            for (Day day : listOfDays) {
-                day.removeActivity(act);
-            }
-        }
-    }
-
-    /**
-     * Removes the mapping of an {@code Activity} in the {@code Day} related {@code HashMap} when an activity is
-     * undscheduled.
-     */
-    private void removeDayMapping(Activity act, Day day) {
-        if (activityDayMap.containsKey(act)) {
-            activityDayMap.get(act).remove(day);
         }
     }
 
@@ -594,8 +561,29 @@ public class ModelManager implements Model {
     @Override
     public void deleteActivity(Activity target) {
         removeActivityMapping(target);
-        removeDayMapping(target);
+        //removeDayMapping(target);
         activities.removeActivity(target);
+
+        List<Day> listOfDaysWithActivity = getDaysWithActivity(target);
+        for (Day d : listOfDaysWithActivity) {
+            Day dayWithoutTargetActivity = removeActivityFromDay(target, d);
+            setDay(d, dayWithoutTargetActivity);
+        }
+    }
+
+    /**
+     * Returns a day without the activity {@code toRemove}.
+     */
+    private Day removeActivityFromDay(Activity toRemove, Day day) {
+        List<ActivityWithTime> copiedList = day.getListOfActivityWithTime();
+        ListIterator<ActivityWithTime> iterator = copiedList.listIterator();
+        while (iterator.hasNext()) {
+            ActivityWithTime curr = iterator.next();
+            if (curr.getActivity().equals(toRemove)) {
+                iterator.remove();
+            }
+        }
+        return new Day(copiedList);
     }
 
     @Override
@@ -759,19 +747,21 @@ public class ModelManager implements Model {
 
     @Override
     public void scheduleActivity(Day day, ActivityWithTime toAdd) {
-        addDayMapping(toAdd.getActivity(), day);
-        day.addActivityWithTime(toAdd);
+        List<ActivityWithTime> copiedList = day.getListOfActivityWithTime();
+        copiedList.add(toAdd);
+        setDay(day, new Day(copiedList));
     }
 
     @Override
     public void unscheduleActivity(Day day, Index toRemove) {
-        Activity activity = day.getListOfActivityWithTime().get(toRemove.getZeroBased()).getActivity();
-        removeDayMapping(activity, day);
-        day.removeActivityWithTime(toRemove);
+        List<ActivityWithTime> copiedList = day.getListOfActivityWithTime();
+        copiedList.remove(toRemove.getZeroBased());
+        setDay(day, new Day(copiedList));
+
     }
 
-    public List<Day> getDays(Activity activity) {
-        return itinerary.getDays(activity);
+    public List<Day> getDaysWithActivity(Activity activity) {
+        return itinerary.getDaysWithActivity(activity);
     }
 
     @Override

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -204,10 +205,10 @@ public class CentralDisplay extends UiPart<Region> {
      */
     private void setupListeners() {
         // set up listeners that will update the agenda
-        //dayList.addListener((ListChangeListener<? super Day>) c -> {
-        //    updateSkin(agenda);
-        //    updateAgenda(agenda, dayList);
-        //});
+        dayList.addListener((ListChangeListener<? super Day>) c -> {
+            updateSkin(agenda);
+            updateAgenda(agenda, dayList);
+        });
         startDateProperty.addListener((observable, oldValue, newValue) -> {
             updateAgenda(agenda, dayList);
             agenda.setDisplayedLocalDateTime(newValue.atStartOfDay());
@@ -299,8 +300,6 @@ public class CentralDisplay extends UiPart<Region> {
             switch (u) {
             case AGENDA:
                 tabDisplay.getSelectionModel().select(agendaTab);
-                updateSkin(agenda);
-                updateAgenda(agenda, dayList);
                 break;
             case INFO:
                 tabDisplay.getSelectionModel().select(infoTab);

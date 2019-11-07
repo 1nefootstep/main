@@ -14,7 +14,6 @@ import seedu.planner.model.day.Day;
 import seedu.planner.model.day.DayList;
 import seedu.planner.model.field.Name;
 
-
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameContact comparison)
@@ -131,8 +130,8 @@ public class Itinerary implements ReadOnlyItinerary {
         setStartDate(newData.getStartDate());
     }
 
-    public List<Day> getDays(Activity activity) {
-        return days.getDays(activity);
+    public List<Day> getDaysWithActivity(Activity activity) {
+        return days.getDaysWithActivity(activity);
     }
 
     public int getNumberOfDays() {
