@@ -571,7 +571,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Returns a day without the activity {@code toRemove}.
+     * Returns a day without the activity {@code toRemove} from {@code day}.
      */
     private Day removeActivityFromDay(Activity toRemove, Day day) {
         List<ActivityWithTime> copiedList = day.getListOfActivityWithTime();
