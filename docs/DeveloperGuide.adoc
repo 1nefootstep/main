@@ -853,7 +853,6 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: Shows the GUI with a set of sample activities, accommodations, contacts and days filled with activities. The window size may not be optimum.
 
 
-
 === Deleting a contact
 
 . Deleting a contact while all activities are listed
